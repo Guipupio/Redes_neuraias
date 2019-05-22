@@ -9,13 +9,17 @@ Created on Tue May 21 15:32:51 2019
 import tensorflow as tf
 import os
 
+## DADOS 
+mnist = tf.keras.datasets.mnist
+(x_train, y_train),(x_test, y_test) = mnist.load_data()
+# reshape to be [samples][width][height][pixels]
+x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
+x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+
+
 def solucao_inicial():
-    mnist = tf.keras.datasets.mnist
-    (x_train, y_train),(x_test, y_test) = mnist.load_data()
-    # reshape to be [samples][width][height][pixels]
-    x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
-    x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
-    x_train, x_test = x_train / 255.0, x_test / 255.0
     model = tf.keras.models.Sequential()
     model.add(tf.keras.layers.Conv2D(32, kernel_size=(3, 3),
      activation='relu',
@@ -31,4 +35,14 @@ def solucao_inicial():
      loss='sparse_categorical_crossentropy',
      metrics=['accuracy'])
     model.fit(x_train, y_train, epochs=5)
-    model.evaluate(x_test, y_test)
+    return model.evaluate(x_test, y_test)
+
+file = open(r"C:\Users\Gabriel\.pupio\Redes_neuraias\EFC2_IA353_1s2019\results_q2_sol_base.txt","w+")
+n = 20
+file.writelines("[")
+for i in range(n):
+    print("Iteracao: " + str(i+1) + "\nProgresso: " + str(int(100*(1+i)/n)) +"%" )
+    file.writelines(str(solucao_inicial())+",\n")
+
+file.writelines("]")
+file.close()
