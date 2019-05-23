@@ -37,7 +37,7 @@ def solucao_inicial():
     model.fit(x_train, y_train, epochs=5)
     return model.evaluate(x_test, y_test)
 
-file = open(r"C:\Users\Gabriel\.pupio\Redes_neuraias\EFC2_IA353_1s2019\results_q2_sol_base.txt","w+")
+file = open(r"C:\Users\Gabriel\.pupio\Redes_neuraias\EFC2_IA353_1s2019\results_q2.txt","w+")
 n = 20
 file.writelines("[")
 for i in range(n):
