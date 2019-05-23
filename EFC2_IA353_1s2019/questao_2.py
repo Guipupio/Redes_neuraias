@@ -37,12 +37,54 @@ def solucao_inicial():
     model.fit(x_train, y_train, epochs=5)
     return model.evaluate(x_test, y_test)
 
+
+def melhor_CNN():
+    model = tf.keras.models.Sequential()
+
+    model.add(tf.keras.layers.Conv2D(64,kernel_size=10, activation='relu', strides=2, padding='same'))
+    model.add(tf.keras.layers.MaxPooling2D(pool_size=3,padding='same'))
+    model.add(tf.keras.layers.Dropout(0.3))
+    model.add(tf.keras.layers.Flatten())
+    model.add(tf.keras.layers.Dense(512, activation=tf.nn.relu))
+    model.add(tf.keras.layers.Dropout(0.5))
+    model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
+    
+    model.compile(optimizer=tf.train.GradientDescentOptimizer(0.17),
+     loss='sparse_categorical_crossentropy',
+     metrics=['accuracy'])
+    
+    model.fit(x_train, y_train, epochs=10, use_multiprocessing=True, batch_size=None)
+    return model.evaluate(x_test, y_test, use_multiprocessing=True)
+
+melhor_CNN()
+
+def desenvolvimento():
+    model = tf.keras.models.Sequential()
+    
+    model.add(tf.keras.layers.Conv2D(60,kernel_size=10, activation='relu', strides=1, padding='same', dilation_rate=2))
+    model.add(tf.keras.layers.MaxPooling2D(pool_size=3,padding='same'))
+    model.add(tf.keras.layers.Dropout(0.3))
+    model.add(tf.keras.layers.Flatten())
+    model.add(tf.keras.layers.Dense(512, activation=tf.nn.relu))
+    model.add(tf.keras.layers.Dropout(0.5))
+    model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
+    
+    model.compile(optimizer=tf.train.GradientDescentOptimizer(0.17),
+     loss='sparse_categorical_crossentropy',
+     metrics=['accuracy'])
+    
+    model.fit(x_train, y_train, epochs=7, use_multiprocessing=True, batch_size=None)
+    return model.evaluate(x_test, y_test, use_multiprocessing=True)
+
+desenvolvimento()
+
+
 file = open(r"C:\Users\Gabriel\.pupio\Redes_neuraias\EFC2_IA353_1s2019\results_q2.txt","w+")
 n = 20
 file.writelines("[")
 for i in range(n):
     print("Iteracao: " + str(i+1) + "\nProgresso: " + str(int(100*(1+i)/n)) +"%" )
-    file.writelines(str(solucao_inicial())+",\n")
+    file.writelines(str(melhor_CNN())+",\n")
 
 file.writelines("]")
 file.close()
