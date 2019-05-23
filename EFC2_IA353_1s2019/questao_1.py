@@ -45,55 +45,6 @@ def get_calcula_media(results:list):
     
     return {'loss': loss/len(results), 'acc':acc/len(results)}
 
-#### Solucao De
-
-def melhor_CNN():
-    X_train = x_train.reshape(60000,28,28,1)
-    X_test = x_test.reshape(10000,28,28,1)
-    model = tf.keras.models.Sequential()
-    
-    model.add(tf.keras.layers.Conv2D(64,kernel_size=10, activation='relu', strides=2, padding='same'))
-    model.add(tf.keras.layers.MaxPooling2D(pool_size=3,padding='same'))
-    model.add(tf.keras.layers.Dropout(0.3))
-#    model.add(tf.keras.layers.GlobalAveragePooling2D())
-#    model.add(tf.keras.layers.Conv2D(15,kernel_size=5, activation='relu'))
-#    model.add(tf.keras.layers.Conv2D(1,kernel_size=3, activation='relu'))
-    model.add(tf.keras.layers.Flatten())
-    model.add(tf.keras.layers.Dense(512, activation=tf.nn.relu))
-    model.add(tf.keras.layers.Dropout(0.5))
-    model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
-    
-    model.compile(optimizer=tf.train.GradientDescentOptimizer(0.17),
-     loss='sparse_categorical_crossentropy',
-     metrics=['accuracy'])
-    
-    model.fit(X_train, y_train, epochs=10, use_multiprocessing=True, batch_size=None)
-    model.evaluate(X_test, y_test, use_multiprocessing=True)
-
-melhor_CNN()    
-
-def desenvolvimento_com_CNN():
-    X_train = x_train.reshape(60000,28,28,1)
-    X_test = x_test.reshape(10000,28,28,1)
-    model = tf.keras.models.Sequential()
-    
-    model.add(tf.keras.layers.Conv2D(64,kernel_size=10, activation='relu', strides=2, padding='same'))
-    model.add(tf.keras.layers.Dropout(0.22))
-    model.add(tf.keras.layers.MaxPooling2D(pool_size=3,padding='same'))
-    model.add(tf.keras.layers.Dropout(0.3))
-    model.add(tf.keras.layers.Flatten())
-    model.add(tf.keras.layers.Dense(512, activation=tf.nn.relu))
-    model.add(tf.keras.layers.Dropout(0.5))
-    model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
-    
-    model.compile(optimizer=tf.keras.optimizers.Adadelta(lr=1.5),
-     loss='sparse_categorical_crossentropy',
-     metrics=['accuracy'])
-    
-    model.fit(X_train, y_train, epochs=10, use_multiprocessing=True, batch_size=None)
-    model.evaluate(X_test, y_test, use_multiprocessing=True)
-
-desenvolvimento_com_CNN()
 
 def desenvolvimento_():
     X_train = x_train.reshape(60000,28,28,1)
