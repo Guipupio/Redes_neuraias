@@ -61,6 +61,7 @@ melhor_CNN()
 def desenvolvimento():
     model = tf.keras.models.Sequential()
     
+    model.add(tf.keras.layers.Conv2D(1,kernel_size=3, activation='relu', strides=2, padding='same', dilation_rate=1))
     model.add(tf.keras.layers.Conv2D(60,kernel_size=10, activation='relu', strides=1, padding='same', dilation_rate=2))
     model.add(tf.keras.layers.MaxPooling2D(pool_size=3,padding='same'))
     model.add(tf.keras.layers.Dropout(0.3))
@@ -79,7 +80,7 @@ def desenvolvimento():
 desenvolvimento()
 
 
-file = open(r"C:\Users\Gabriel\.pupio\Redes_neuraias\EFC2_IA353_1s2019\results_q2.txt","w+")
+file = open(r"C:\Users\Gabriel\.pupio\Redes_neuraias\EFC2_IA353_1s2019\aaa.txt","w+")
 n = 20
 file.writelines("[")
 for i in range(n):
