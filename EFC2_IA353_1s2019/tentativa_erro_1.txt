@@ -1,0 +1,5 @@
+Parametros: num_epoch=10; camada_um=256; dropout_um=0.2; camada_dois=32; dropout_dois=0.2; gradient=0.17
+[0.06806011233548634, 0.9816],
+[0.06894597718857404, 0.9822],
+[0.07630961318983609, 0.9797],
+]
