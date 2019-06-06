@@ -31,7 +31,8 @@ def solucao_inicial():
 def get_media(n=50):
     results=[]
     for i in range(n):
-        results.append(solucao_inicial())
+        print("Iteracao: " + str(i))
+        results.append(nova_MLP())
     
     return results
 
@@ -110,7 +111,7 @@ def nova_MLP(num_epochs=10, units_camada_um=512, dropout_um=0.2, camada_dois=128
      loss='sparse_categorical_crossentropy',
      metrics=['accuracy'])
     model.fit(X_train, y_train, epochs=num_epochs, use_multiprocessing=True)
-    model.evaluate(X_test, y_test, use_multiprocessing=True)
+    return model.evaluate(X_test, y_test, use_multiprocessing=True)
     
     model_json = model.to_json()
     json_file = open("model_MLP.json", "w+")
