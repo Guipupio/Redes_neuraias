@@ -67,34 +67,22 @@ def desenvolvimento_(num_epochs, units_camada_um, dropout_um, camada_dois, dropo
 def melhor_resultado(num_epochs=10, units_camada_um=512, dropout_um=0.2, camada_dois=128, dropout_dois=0.3, gradient=0.18):
     procurando=True
     num_exce = 0
-    while procurando:
-        num_exce += 1
-        X_train = x_train.reshape(60000,28,28,1)
-        X_test = x_test.reshape(10000,28,28,1)
-        model = tf.keras.models.Sequential()
-        model.add(tf.keras.layers.Flatten())
-        model.add(tf.keras.layers.Dense(units_camada_um, activation=tf.nn.relu))
-        model.add(tf.keras.layers.Dropout(dropout_um))
-        model.add(tf.keras.layers.Dense(camada_dois, activation=tf.nn.relu))
-        model.add(tf.keras.layers.Dropout(dropout_dois))
-        
-        model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
-        
-        model.compile(optimizer=tf.train.GradientDescentOptimizer(gradient),
-         loss='sparse_categorical_crossentropy',
-         metrics=['accuracy'])
-        model.fit(X_train, y_train, epochs=num_epochs, use_multiprocessing=True)
-        valores = model.evaluate(X_test, y_test, use_multiprocessing=True)
-        
-        if valores[1] >=0.9835:
-            procurando = False
-            model_json = model.to_json()
-            json_file = open("model_MLP.json", "w+")
-            json_file.write(model_json)
-            json_file.close()
-            model.save_weights("model_MLP.h5")
-            print("Model saved to disk")
-            os.getcwd()
+    X_train = x_train.reshape(60000,28,28,1)
+    X_test = x_test.reshape(10000,28,28,1)
+    model = tf.keras.models.Sequential()
+    model.add(tf.keras.layers.Flatten())
+    model.add(tf.keras.layers.Dense(units_camada_um, activation=tf.nn.relu))
+    model.add(tf.keras.layers.Dropout(dropout_um))
+    model.add(tf.keras.layers.Dense(camada_dois, activation=tf.nn.relu))
+    model.add(tf.keras.layers.Dropout(dropout_dois))
+
+    model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
+
+    model.compile(optimizer=tf.train.GradientDescentOptimizer(gradient),
+     loss='sparse_categorical_crossentropy',
+     metrics=['accuracy'])
+    model.fit(X_train, y_train, epochs=num_epochs, use_multiprocessing=True)
+    valores = model.evaluate(X_test, y_test, use_multiprocessing=True)
 
 def nova_MLP(num_epochs=10, units_camada_um=512, dropout_um=0.2, camada_dois=128, dropout_dois=0.3, gradient=0.18):
     X_train = x_train.reshape(60000,28,28,1)
