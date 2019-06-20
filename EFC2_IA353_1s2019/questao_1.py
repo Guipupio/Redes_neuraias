@@ -31,7 +31,7 @@ def solucao_inicial():
 def get_media(n=50):
     results=[]
     for i in range(n):
-        results.append(solucao_inicial())
+        results.append(nova_MLP())
     
     return results
 
@@ -162,5 +162,5 @@ def obtem_lista_de_resultados():
         file.close()
 
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     print("jfsd")
