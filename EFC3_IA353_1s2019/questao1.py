@@ -50,7 +50,7 @@ x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
 x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
-model = keras.models.load_model('mnist_model.h5')
+model = keras.models.load_model(r'C:\Users\Gabriel\.pupio\Redes_neuraias\EFC3_IA353_1s2019\mnist_model.h5')
 model_wo_sm = innvestigate.utils.keras.graph.model_wo_softmax(model)
 
 imagem = x_test[0:1]

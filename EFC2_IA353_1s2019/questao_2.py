@@ -46,10 +46,12 @@ def melhor_CNN():
     model.add(tf.keras.layers.Dropout(0.3))
     model.add(tf.keras.layers.Flatten())
     model.add(tf.keras.layers.Dense(512, activation=tf.nn.relu))
-    model.add(tf.keras.layers.Dropout(0.5))
+    model.add(tf.keras.layers.Dropout(0.2))
+    model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
+    model.add(tf.keras.layers.Dropout(0.3))
     model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
     
-    model.compile(optimizer=tf.train.GradientDescentOptimizer(0.17),
+    model.compile(optimizer=tf.train.GradientDescentOptimizer(0.18),
      loss='sparse_categorical_crossentropy',
      metrics=['accuracy'])
     
@@ -80,7 +82,7 @@ def desenvolvimento():
 desenvolvimento()
 
 
-file = open(r"C:\Users\Gabriel\.pupio\Redes_neuraias\EFC2_IA353_1s2019\aaa.txt","w+")
+file = open(r"/home/pupio/git/Redes_neuraias/EFC2_IA353_1s2019/resultados_q2/resultado_q2_versao_final.txt","w+")
 n = 20
 file.writelines("[")
 for i in range(n):
